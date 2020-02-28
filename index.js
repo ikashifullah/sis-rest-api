@@ -43,6 +43,30 @@ app.post('/api/courses', (req, res) => {
     res.send(course);
 });
 
+app.put('/api/courses/:id', (req, res) => {
+    // Find the course or 404 error
+    const course = courses.courses.find((c) => c.id === parseInt(req.params.id));
+    if (!course) res.status(404).send('The course with given ID is not found!');
+    // Validate else 400 error
+    const schema = {
+        name: Joi.string().min(3).required(),
+        duration: Joi.string().min(3).required(),
+        fee: Joi.number().min(3).required(),
+        startDate: Joi.date().required()
+    };
+    const result = Joi.validate(req.body, schema);
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+    // Update the course
+    course.name = req.body.name;
+    course.duration = req.body.duration;
+    course.fee = req.body.fee;
+    course.startDate = req.body.startDate;
+    res.send(course);
+});
+
 // PORT
 const port = process.env.PORT || 3000;
 app.listen(port, () => { console.log(`listening at port ${port} ...`)});
