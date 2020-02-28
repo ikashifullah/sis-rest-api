@@ -20,6 +20,10 @@ app.get('/api/courses/:id', (req, res) => {
 });
 
 app.post('/api/courses', (req, res) => {
+    if (!req.body.name || req.body.name < 3) {
+        res.status(400).send('Name is required and should be at least 3 characters');
+        return;
+    }
     const course = {
         id: courses.courses.length + 1,
         name: req.body.name,
