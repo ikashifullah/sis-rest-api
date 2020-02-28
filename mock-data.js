@@ -22,8 +22,39 @@ const courses = [
     }
 ];
 
+const STUDENTS = [
+    {
+        id: 1,
+        name: 'Faisal Farooq',
+        age: 20,
+        class: '8th',
+        section: 'A',
+        address: 'Lahore, Pakistan',
+        courseId: 1,
+    },
+    {
+        id: 2,
+        name: 'Yasir Farooq',
+        age: 35,
+        class: '12th',
+        section: 'B',
+        address: 'Lahore, Pakistan',
+        courseId: 2,
+    },
+    {
+        id: 3,
+        name: 'Mutahir',
+        age: 26,
+        class: '11th',
+        section: 'A',
+        address: 'Lahore, Pakistan',
+        courseId: 3,
+    },
+];
+
 module.exports = {
-    courses: courses
+    courses: courses,
+    students: STUDENTS
 };
 
     
