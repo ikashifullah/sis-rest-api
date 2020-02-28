@@ -1,7 +1,9 @@
 const Joi = require('joi');
+var cors = require('cors');
 const express = require('express');
 const { courses, students } = require('./mock-data');
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
