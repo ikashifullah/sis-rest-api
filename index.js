@@ -1,6 +1,7 @@
 const express = require('express');
 const courses = require('./mock-data');
 const app = express();
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Welcome to Student Information System REST API');
@@ -15,6 +16,18 @@ app.get('/api/courses', (req, res) => {
 app.get('/api/courses/:id', (req, res) => {
     const course = courses.courses.find((c) => c.id === parseInt(req.params.id));
     if (!course) res.status(404).send('The course with given ID is not found!');
+    res.send(course);
+});
+
+app.post('/api/courses', (req, res) => {
+    const course = {
+        id: courses.courses.length + 1,
+        name: req.body.name,
+        duration: req.body.duration,
+        fee: req.body.fee,
+        startDate: req.body.startDate
+    };
+    courses.courses.push(course);
     res.send(course);
 });
 
