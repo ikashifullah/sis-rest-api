@@ -1,8 +1,13 @@
 const express = require('express');
+const courses = require('./mock-data');
 const app = express();
 
 app.get('/', (req, res) => {
     res.send('Welcome to Student Information System REST API');
+});
+
+app.get('/api/courses', (req, res) => {
+    res.send(courses);
 });
 
 // PORT
