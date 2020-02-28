@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const express = require('express');
 const courses = require('./mock-data');
 const app = express();
@@ -20,8 +21,15 @@ app.get('/api/courses/:id', (req, res) => {
 });
 
 app.post('/api/courses', (req, res) => {
-    if (!req.body.name || req.body.name < 3) {
-        res.status(400).send('Name is required and should be at least 3 characters');
+    const schema = {
+        name: Joi.string().min(3).required(),
+        duration: Joi.string().min(3).required(),
+        fee: Joi.number().min(3).required(),
+        startDate: Joi.date().required()
+    };
+    const result = Joi.validate(req.body, schema);
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message);
         return;
     }
     const course = {
