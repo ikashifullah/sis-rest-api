@@ -1,4 +1,4 @@
-const courses = [
+const COURSES = [
     {
         id: 1,
         name: 'Basic JavaScript',
@@ -53,7 +53,7 @@ const STUDENTS = [
 ];
 
 module.exports = {
-    courses: courses,
+    courses: COURSES,
     students: STUDENTS
 };
 
