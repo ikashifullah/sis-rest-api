@@ -18,6 +18,8 @@ app.get('/api/students/:id', (req, res) => {
     const student = students.find((c) => c.id === parseInt(req.params.id));
     if (!student) return res.status(404).send('The student with given ID is not found!');
     
+    // Return Course details along with student
+    student.course = courses.find((course) => course.id === student.courseId);
     res.send(student);
 });
 
